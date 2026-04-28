@@ -3,6 +3,9 @@ import {
   AlertCircle,
   Flame,
   Globe2,
+  Monitor,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { DetailPanel } from "./components/DetailPanel";
 import { FilterPanel, type Filters } from "./components/FilterPanel";
@@ -28,6 +31,17 @@ const initialFilters: Filters = {
   search: "",
 };
 
+type ThemePreference = "auto" | "dark" | "light";
+
+function getStoredThemePreference(): ThemePreference {
+  try {
+    const stored = localStorage.getItem("volcano-dashboard-theme");
+    return stored === "dark" || stored === "light" || stored === "auto" ? stored : "auto";
+  } catch {
+    return "auto";
+  }
+}
+
 function matchesAlert(volcano: Volcano, alert: string) {
   if (alert === "all") return true;
   if (alert === "WARNING") return volcano.alertLevel === "WARNING" || volcano.aviationColorCode === "RED";
@@ -51,6 +65,38 @@ function applyFilters(volcanoes: Volcano[], filters: Filters) {
     if (query && !normalizeName(volcano.name).includes(query)) return false;
     return true;
   });
+}
+
+function ThemeSelector({
+  value,
+  onChange,
+}: {
+  value: ThemePreference;
+  onChange: (value: ThemePreference) => void;
+}) {
+  const options = [
+    { value: "auto" as const, label: "Auto", icon: <Monitor size={15} /> },
+    { value: "dark" as const, label: "Dark", icon: <Moon size={15} /> },
+    { value: "light" as const, label: "Light", icon: <Sun size={15} /> },
+  ];
+
+  return (
+    <div className="inline-flex rounded-lg border border-white/10 bg-white/[0.045] p-1 shadow-glow backdrop-blur" aria-label="Theme selector">
+      {options.map((option) => (
+        <button
+          key={option.value}
+          className={`inline-flex h-9 items-center gap-2 rounded-md px-3 text-sm font-semibold transition ${
+            value === option.value ? "bg-seismo text-basalt-950" : "text-slate-300 hover:bg-white/[0.07] hover:text-white"
+          }`}
+          onClick={() => onChange(option.value)}
+          aria-pressed={value === option.value}
+        >
+          {option.icon}
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
 }
 
 function EruptionWarningCard({
@@ -252,6 +298,7 @@ export default function App() {
   const [isTableCollapsed, setIsTableCollapsed] = useState(true);
   const [catalogError, setCatalogError] = useState<string>();
   const [usgsStatus, setUsgsStatus] = useState<"loading" | "available" | "unavailable">("loading");
+  const [themePreference, setThemePreference] = useState<ThemePreference>(getStoredThemePreference);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -280,6 +327,22 @@ export default function App() {
     loadData();
     return () => controller.abort();
   }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+
+    function applyTheme() {
+      const effectiveTheme = themePreference === "auto" ? (media.matches ? "dark" : "light") : themePreference;
+      document.documentElement.dataset.theme = effectiveTheme;
+      document.documentElement.style.colorScheme = effectiveTheme;
+      document.querySelector('meta[name="theme-color"]')?.setAttribute("content", effectiveTheme === "light" ? "#f8fafc" : "#0d1219");
+      localStorage.setItem("volcano-dashboard-theme", themePreference);
+    }
+
+    applyTheme();
+    media.addEventListener("change", applyTheme);
+    return () => media.removeEventListener("change", applyTheme);
+  }, [themePreference]);
 
   const filtered = useMemo(() => applyFilters(volcanoes, filters), [volcanoes, filters]);
   const sorted = useMemo(() => sortVolcanoes(filtered, sortKey, sortDirection), [filtered, sortDirection, sortKey]);
@@ -312,6 +375,7 @@ export default function App() {
               </div>
               <h1 className="text-3xl font-semibold text-white md:text-5xl">Volcano Monitoring Dashboard</h1>
             </div>
+            <ThemeSelector value={themePreference} onChange={setThemePreference} />
           </div>
         </div>
       </header>
@@ -350,25 +414,20 @@ export default function App() {
         />
         <DetailPanel volcano={selected} onClose={() => setSelectedId(undefined)} />
 
-        <footer className="pb-8">
-          <section className="panel rounded-lg p-5">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div>
-                <p className="text-sm text-slate-300">
-                  Current eruptive activity, unrest, USGS alert overlays, and global Holocene volcano metadata in one operational view.
-                </p>
-                <p className="mt-1 text-sm text-slate-400">Made by András Tóth and GPT-5.5.</p>
-              </div>
-              <span className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-slate-300">
-                {weeklyReportMetadata.reportPeriod}
-              </span>
+        <footer className="border-t border-white/10 py-8 text-center">
+          <div className="mx-auto max-w-3xl">
+            <p className="text-sm text-slate-300">
+              Current eruptive activity, unrest, USGS alert overlays, and global Holocene volcano metadata in one operational view.
+            </p>
+            <p className="mt-1 text-sm text-slate-400">Made by András Tóth and GPT-5.5.</p>
+            <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-400">
+              <span className="font-semibold text-slate-300">{weeklyReportMetadata.reportPeriod}</span>
+              <span className="hidden h-1 w-1 rounded-full bg-slate-600 sm:inline-block" />
+              <a className="text-seismo hover:text-white" href="https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes/volcanoes" target="_blank" rel="noreferrer">NOAA NCEI</a>
+              <a className="text-seismo hover:text-white" href="https://volcano.si.edu/reports_weekly.cfm" target="_blank" rel="noreferrer">Smithsonian/GVP</a>
+              <a className="text-seismo hover:text-white" href="https://volcanoes.usgs.gov/vsc/api/" target="_blank" rel="noreferrer">USGS APIs</a>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2 text-sm">
-              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes/volcanoes" target="_blank" rel="noreferrer">NOAA NCEI</a>
-              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://volcano.si.edu/reports_weekly.cfm" target="_blank" rel="noreferrer">Smithsonian/GVP Weekly Report</a>
-              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://volcanoes.usgs.gov/vsc/api/" target="_blank" rel="noreferrer">USGS Volcano APIs</a>
-            </div>
-          </section>
+          </div>
         </footer>
       </div>
     </main>

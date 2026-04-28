@@ -7,7 +7,24 @@
       name="description"
       content="A static-first global volcano monitoring dashboard using NOAA, Smithsonian, and USGS public data."
     />
+    <meta name="theme-color" content="#0d1219" />
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
     <title>Volcano Monitoring Dashboard</title>
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("volcano-dashboard-theme") || "auto";
+          var theme = stored === "auto" ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : stored;
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -64,7 +64,7 @@ export function VolcanoMap({
       </div>
       <div className="relative h-[540px] lg:h-[680px]">
         {controls ? (
-          <div className="pointer-events-none absolute left-3 top-3 z-[500] max-w-[calc(100%-1.5rem)]">
+          <div className="pointer-events-none absolute left-14 top-3 z-[500] max-w-[calc(100%-4.25rem)] sm:left-16">
             <div className="pointer-events-auto">
               <button
                 className="inline-flex h-10 items-center gap-2 rounded-md border border-white/15 bg-basalt-950/75 px-3 text-sm font-semibold text-slate-100 shadow-glow backdrop-blur-md transition hover:border-seismo/60"

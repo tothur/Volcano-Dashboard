@@ -84,3 +84,94 @@ select {
     @apply text-xs font-semibold uppercase text-slate-400;
   }
 }
+
+html[data-theme="light"] {
+  color-scheme: light;
+  background: #f5f7fb;
+}
+
+html[data-theme="light"] body {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(14, 165, 233, 0.16), transparent 30rem),
+    linear-gradient(140deg, #f8fafc 0%, #eef4f8 48%, #e7eef5 100%);
+  color: #111827;
+}
+
+html[data-theme="light"] .panel {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  background: rgba(255, 255, 255, 0.78) !important;
+  box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 24px 70px rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] .input {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  background: rgba(255, 255, 255, 0.86) !important;
+  color: #0f172a !important;
+}
+
+html[data-theme="light"] .label,
+html[data-theme="light"] .text-slate-500 {
+  color: #64748b !important;
+}
+
+html[data-theme="light"] .text-white,
+html[data-theme="light"] .text-slate-100,
+html[data-theme="light"] .text-slate-200 {
+  color: #0f172a !important;
+}
+
+html[data-theme="light"] .text-slate-300,
+html[data-theme="light"] .text-slate-400 {
+  color: #475569 !important;
+}
+
+html[data-theme="light"] .text-orange-100,
+html[data-theme="light"] .text-orange-200 {
+  color: #9a3412 !important;
+}
+
+html[data-theme="light"] .text-red-100,
+html[data-theme="light"] .text-red-200 {
+  color: #991b1b !important;
+}
+
+html[data-theme="light"] .text-yellow-100 {
+  color: #854d0e !important;
+}
+
+html[data-theme="light"] .text-emerald-100 {
+  color: #047857 !important;
+}
+
+html[data-theme="light"] .text-sky-100 {
+  color: #0369a1 !important;
+}
+
+html[data-theme="light"] [class*="bg-basalt-950"],
+html[data-theme="light"] [class*="bg-basalt-900"],
+html[data-theme="light"] [class*="bg-basalt-850"],
+html[data-theme="light"] [class*="bg-basalt-800"],
+html[data-theme="light"] [class*="bg-white/["] {
+  background-color: rgba(255, 255, 255, 0.68) !important;
+}
+
+html[data-theme="light"] [class*="border-white/"] {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+}
+
+html[data-theme="light"] header {
+  background: rgba(248, 250, 252, 0.82) !important;
+}
+
+html[data-theme="light"] .leaflet-popup-content-wrapper,
+html[data-theme="light"] .leaflet-popup-tip,
+html[data-theme="light"] .leaflet-control-zoom a {
+  background: #ffffff;
+  color: #0f172a;
+  border-color: rgba(15, 23, 42, 0.14);
+}
+
+html[data-theme="light"] .leaflet-control-attribution {
+  background: rgba(255, 255, 255, 0.78) !important;
+  color: #334155 !important;
+}
