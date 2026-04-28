@@ -244,7 +244,7 @@ function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; o
                   {group.volcanoes.length} erupting
                 </span>
               </div>
-              <div className="space-y-3">
+              <div className="grid gap-3 xl:grid-cols-2 2xl:grid-cols-3">
                 {Array.from(new Set(group.volcanoes.map((volcano) => volcano.country)))
                   .sort((a, b) => a.localeCompare(b))
                   .map((country) => {
@@ -258,7 +258,7 @@ function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; o
                             {countryVolcanoes.length}
                           </span>
                         </div>
-                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+                        <div className="grid gap-2 sm:grid-cols-2">
                           {countryVolcanoes.map((volcano) => (
                             <button
                               key={volcano.id}
