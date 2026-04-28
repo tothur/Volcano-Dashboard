@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import type { ReactNode } from "react";
 import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from "react-leaflet";
 import { alertLabel } from "../lib/volcanoData";
 import type { Volcano } from "../types/volcano";
@@ -37,10 +38,12 @@ export function VolcanoMap({
   volcanoes,
   selected,
   onSelect,
+  controls,
 }: {
   volcanoes: Volcano[];
   selected?: Volcano;
   onSelect: (volcano: Volcano) => void;
+  controls?: ReactNode;
 }) {
   return (
     <section className="panel overflow-hidden rounded-lg">
@@ -56,7 +59,12 @@ export function VolcanoMap({
           <span className="inline-flex items-center gap-1"><i className="h-2.5 w-2.5 rounded-full bg-seismo" /> Historical</span>
         </div>
       </div>
-      <div className="h-[460px] lg:h-[610px]">
+      <div className="relative h-[540px] lg:h-[680px]">
+        {controls ? (
+          <div className="pointer-events-none absolute left-3 right-3 top-3 z-[500]">
+            <div className="pointer-events-auto">{controls}</div>
+          </div>
+        ) : null}
         <MapContainer center={[18, 12]} zoom={2} minZoom={2} scrollWheelZoom>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'

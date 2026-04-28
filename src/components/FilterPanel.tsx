@@ -27,8 +27,8 @@ export function FilterPanel({ filters, onFiltersChange, volcanoes }: FilterPanel
   const update = <K extends keyof Filters>(key: K, value: Filters[K]) => onFiltersChange({ ...filters, [key]: value });
 
   return (
-    <section className="panel rounded-lg p-3">
-      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-[auto_1.5fr_repeat(5,minmax(0,1fr))_auto] xl:items-end">
+    <section className="rounded-lg border border-white/15 bg-basalt-950/75 p-2 shadow-glow backdrop-blur-md">
+      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-[auto_1.35fr_repeat(5,minmax(0,1fr))_auto] xl:items-end">
         <div className="hidden items-center gap-2 text-sm font-semibold uppercase text-slate-300 xl:flex">
           <SlidersHorizontal size={16} className="text-seismo" />
           Filters

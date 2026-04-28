@@ -56,47 +56,30 @@ function applyFilters(volcanoes: Volcano[], filters: Filters) {
 function EruptionWarningCard({
   erupting,
   metadata,
-  usgsStatus,
 }: {
   erupting: Volcano[];
   metadata?: VolcanoCatalogMetadata;
-  usgsStatus: "loading" | "available" | "unavailable";
 }) {
   return (
     <section className="panel overflow-hidden rounded-lg border-orange-400/30">
-      <div className="grid gap-0 lg:grid-cols-[320px_1fr_260px]">
-        <div className="bg-orange-500/12 p-5">
-          <div className="flex items-center gap-3">
-            <span className="rounded-lg bg-orange-500/20 p-3 text-orange-200">
-              <Flame size={28} />
-            </span>
-            <div>
-              <p className="text-sm font-semibold uppercase text-orange-100">Erupting volcanoes</p>
-              <p className="text-5xl font-semibold text-white">{erupting.length}</p>
+      <div className="flex flex-col gap-4 bg-orange-500/10 p-4 lg:flex-row lg:items-center lg:justify-between">
+        <div className="flex items-center gap-3">
+          <span className="rounded-lg bg-orange-500/20 p-3 text-orange-200">
+            <Flame size={24} />
+          </span>
+          <div>
+            <p className="text-xs font-semibold uppercase text-orange-100">Erupting volcanoes</p>
+            <div className="flex items-baseline gap-3">
+              <p className="text-4xl font-semibold text-white">{erupting.length}</p>
+              <h2 className="text-lg font-semibold text-white">New Eruptive Activity or Continuing Eruptive Activity</h2>
             </div>
           </div>
         </div>
-        <div>
-          <div className="p-5">
-            <h2 className="text-xl font-semibold text-white">Current eruption activity from the weekly report</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-300">
-              Counted from bundled Smithsonian/USGS reports labeled New Eruptive Activity or Continuing Eruptive Activity for{" "}
-              {weeklyReportMetadata.reportPeriod}. This is report-driven activity, not inferred from historical metadata.
-            </p>
-          </div>
-        </div>
-        <div className="border-t border-white/10 p-5 lg:border-l lg:border-t-0">
-          <p className="label">Data freshness</p>
-          <p className="mt-2 text-sm text-slate-200">{metadata ? new Date(metadata.generatedAt).toLocaleDateString() : "Loading catalog"}</p>
-          <p className="mt-3 flex items-center gap-2 text-xs text-slate-400">
-            <span
-              className={`h-2.5 w-2.5 rounded-full ${
-                usgsStatus === "available" ? "bg-seismo" : usgsStatus === "loading" ? "bg-yellow-300" : "bg-slate-500"
-              }`}
-            />
-            USGS overlay {usgsStatus === "available" ? "available" : usgsStatus === "loading" ? "checking" : "unavailable"}
-          </p>
-        </div>
+        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-basalt-950/65 px-3 py-1.5 text-xs font-semibold text-slate-200">
+          {weeklyReportMetadata.reportPeriod}
+          <span className="h-1 w-1 rounded-full bg-slate-500" />
+          Data refreshed {metadata ? new Date(metadata.generatedAt).toLocaleDateString() : "loading"}
+        </span>
       </div>
     </section>
   );
@@ -135,69 +118,6 @@ const REGION_STYLE: Record<RegionName, { accent: string; label: string }> = {
   },
 };
 
-const EUROPEAN_ACTIVE_VOLCANOES = [
-  {
-    name: "Etna",
-    rank: "Frequent summit eruptions",
-    context: "One of Europe's most persistently active volcanoes, with recurring lava fountains, ash emissions, and summit-crater activity.",
-  },
-  {
-    name: "Stromboli",
-    rank: "Persistent explosive activity",
-    context: "Known for long-lived Strombolian explosions and intermittent lava-flow or paroxysmal episodes.",
-  },
-  {
-    name: "Campi Flegrei",
-    rank: "Caldera unrest",
-    context: "A densely monitored caldera near Naples where ground deformation and seismic swarms make unrest status especially important.",
-  },
-  {
-    name: "Vesuvius",
-    rank: "High-consequence active volcano",
-    context: "Not currently listed as erupting here, but historically active and closely watched because of exposure around Naples.",
-  },
-  {
-    name: "Fagradalsfjall",
-    rank: "Recent Reykjanes activity",
-    context: "Part of Iceland's recently active Reykjanes volcanic systems, with fissure eruptions in the modern activity cycle.",
-  },
-  {
-    name: "Grimsvotn",
-    rank: "Frequently active Icelandic system",
-    context: "A subglacial caldera system with repeated historical eruptions and aviation-relevant ash potential.",
-  },
-  {
-    name: "Hekla",
-    rank: "Historically frequent eruptions",
-    context: "A historically active Icelandic stratovolcano with short-warning eruption behavior.",
-  },
-  {
-    name: "Katla",
-    rank: "Major monitored subglacial volcano",
-    context: "A large Icelandic system monitored for seismicity, geothermal changes, and potential outburst-flood-producing eruptions.",
-  },
-  {
-    name: "Santorini",
-    rank: "Aegean caldera system",
-    context: "A historically active caldera in Greece with important seismic and volcanic monitoring relevance.",
-  },
-  {
-    name: "La Palma",
-    rank: "Recent Canary Islands eruption",
-    context: "Site of the 2021 Cumbre Vieja eruption and one of the key active volcanic islands in the Canaries.",
-  },
-  {
-    name: "Tenerife",
-    rank: "Canary Islands active system",
-    context: "Includes Teide-Pico Viejo volcanic system; historically active and closely monitored because of island exposure.",
-  },
-  {
-    name: "Pico",
-    rank: "Azores unrest watch",
-    context: "Azores stratovolcano included because recent weekly reporting has noted unrest context in the region.",
-  },
-];
-
 function worldRegionFor(volcano: Volcano): RegionName {
   const country = volcano.country;
   const region = volcano.region.toLowerCase();
@@ -233,65 +153,6 @@ function worldRegionFor(volcano: Volcano): RegionName {
   if (["Ethiopia", "Kenya", "Tanzania", "DR Congo", "Cameroon", "Eritrea", "Comoros"].includes(country) || region.includes("africa")) return "Africa";
   if (country === "Antarctica") return "Other";
   return "Asia";
-}
-
-function EuropeanVolcanoesSection({ volcanoes, onSelect }: { volcanoes: Volcano[]; onSelect: (volcano: Volcano) => void }) {
-  const featured = EUROPEAN_ACTIVE_VOLCANOES.map((item) => {
-    const volcano = volcanoes.find((candidate) => candidate.name === item.name);
-    return volcano ? { ...item, volcano } : null;
-  }).filter((item): item is (typeof EUROPEAN_ACTIVE_VOLCANOES)[number] & { volcano: Volcano } => Boolean(item));
-
-  if (!featured.length) return null;
-
-  return (
-    <section className="panel rounded-lg p-4">
-      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex items-center gap-3">
-          <span className="inline-flex h-14 w-14 items-center justify-center rounded-lg border border-sky-300/30 bg-sky-400/10">
-            <RegionGlobeLogo region="Europe" />
-          </span>
-          <div>
-            <h2 className="text-lg font-semibold text-white">European volcanoes to watch</h2>
-            <p className="text-sm text-slate-400">Most active or closely monitored European systems from the bundled catalog.</p>
-          </div>
-        </div>
-        <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-semibold text-slate-300">
-          {featured.length} featured
-        </span>
-      </div>
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-        {featured.map(({ volcano, rank, context }) => (
-          <article key={volcano.id} className="rounded-lg border border-white/10 bg-basalt-950/55 p-4">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <h3 className="text-base font-semibold text-white">{volcano.name}</h3>
-                <p className="mt-1 text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
-              </div>
-              <VolcanoStatus volcano={volcano} />
-            </div>
-            <p className="mt-3 text-xs font-semibold uppercase text-sky-100">{rank}</p>
-            <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-300">{context}</p>
-            <dl className="mt-4 grid grid-cols-2 gap-2 text-xs">
-              <div className="rounded-md border border-white/10 bg-white/[0.03] p-2">
-                <dt className="text-slate-500">Type</dt>
-                <dd className="mt-1 text-slate-200">{volcano.volcanoType}</dd>
-              </div>
-              <div className="rounded-md border border-white/10 bg-white/[0.03] p-2">
-                <dt className="text-slate-500">Last eruption</dt>
-                <dd className="mt-1 text-slate-200">{volcano.lastKnownEruption}</dd>
-              </div>
-            </dl>
-            <div className="mt-4 flex items-center justify-between gap-3">
-              <span className="text-xs text-slate-500">{volcano.latestReportDate ?? "Catalog metadata"}</span>
-              <button className="text-sm font-semibold text-seismo hover:text-white" onClick={() => onSelect(volcano)}>
-                Details
-              </button>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
 }
 
 function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; onSelect: (volcano: Volcano) => void }) {
@@ -450,12 +311,15 @@ export default function App() {
           </section>
         ) : null}
 
-        <EruptionWarningCard erupting={eruptingVolcanoes} metadata={metadata} usgsStatus={volcanoes.length ? usgsStatus : "loading"} />
+        <EruptionWarningCard erupting={eruptingVolcanoes} metadata={metadata} />
         <EruptingVolcanoCards volcanoes={eruptingVolcanoes} onSelect={(volcano) => setSelectedId(volcano.id)} />
-        <EuropeanVolcanoesSection volcanoes={volcanoes} onSelect={(volcano) => setSelectedId(volcano.id)} />
-        <FilterPanel filters={filters} onFiltersChange={setFilters} volcanoes={volcanoes} />
 
-        <VolcanoMap volcanoes={sorted} selected={selected} onSelect={(volcano) => setSelectedId(volcano.id)} />
+        <VolcanoMap
+          volcanoes={sorted}
+          selected={selected}
+          onSelect={(volcano) => setSelectedId(volcano.id)}
+          controls={<FilterPanel filters={filters} onFiltersChange={setFilters} volcanoes={volcanoes} />}
+        />
         <VolcanoTable
           volcanoes={sorted}
           selectedId={selected?.id}
