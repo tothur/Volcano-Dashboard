@@ -265,14 +265,16 @@ function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; o
                               className="grid min-h-[116px] grid-rows-[auto_1fr_auto] rounded-lg border border-white/10 bg-white/[0.035] p-3 text-left transition hover:border-seismo/60 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-seismo/60"
                               onClick={() => onSelect(volcano)}
                             >
-                              <div className="flex h-7 justify-end">
-                                <VolcanoStatus volcano={volcano} className="h-7 w-[176px] max-w-full truncate whitespace-nowrap" />
-                              </div>
-                              <div className="pt-2">
+                              <div className="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-start gap-3">
                                 <h5 className="truncate text-base font-semibold text-white">{volcano.name}</h5>
-                                <p className="mt-1 truncate text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
+                                <p className="truncate text-right text-xs font-medium text-slate-400">{volcano.country} / {volcano.region}</p>
                               </div>
-                              <p className="pt-3 text-xs text-slate-500">{volcano.latestReportDate ?? weeklyReportMetadata.reportDate}</p>
+                              <p className="self-center pt-3 text-xs text-slate-500">
+                                {volcano.latestReportDate ?? weeklyReportMetadata.reportDate}
+                              </p>
+                              <div className="pt-3">
+                                <VolcanoStatus volcano={volcano} className="h-7 w-full truncate whitespace-nowrap" />
+                              </div>
                             </button>
                           ))}
                         </div>
