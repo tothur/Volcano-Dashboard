@@ -262,17 +262,17 @@ function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; o
                           {countryVolcanoes.map((volcano) => (
                             <button
                               key={volcano.id}
-                              className="rounded-lg border border-white/10 bg-white/[0.035] p-3 text-left transition hover:border-seismo/60 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-seismo/60"
+                              className="grid min-h-[116px] grid-rows-[auto_1fr_auto] rounded-lg border border-white/10 bg-white/[0.035] p-3 text-left transition hover:border-seismo/60 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-seismo/60"
                               onClick={() => onSelect(volcano)}
                             >
-                              <div className="flex items-start justify-between gap-2">
-                                <div>
-                                  <h5 className="text-base font-semibold text-white">{volcano.name}</h5>
-                                  <p className="mt-1 text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
-                                </div>
-                                <VolcanoStatus volcano={volcano} />
+                              <div className="flex h-7 justify-end">
+                                <VolcanoStatus volcano={volcano} className="h-7 w-[176px] max-w-full truncate whitespace-nowrap" />
                               </div>
-                              <p className="mt-3 text-xs text-slate-500">{volcano.latestReportDate ?? weeklyReportMetadata.reportDate}</p>
+                              <div className="pt-2">
+                                <h5 className="truncate text-base font-semibold text-white">{volcano.name}</h5>
+                                <p className="mt-1 truncate text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
+                              </div>
+                              <p className="pt-3 text-xs text-slate-500">{volcano.latestReportDate ?? weeklyReportMetadata.reportDate}</p>
                             </button>
                           ))}
                         </div>

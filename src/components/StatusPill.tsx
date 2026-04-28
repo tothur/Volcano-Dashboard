@@ -22,20 +22,28 @@ const reportStyles: Record<ActivityReportType, string> = {
   "USGS Alert": "border-orange-400/50 bg-orange-500/15 text-orange-100",
 };
 
-export function StatusPill({ label, tone }: { label: string; tone?: AlertLevel | AviationColorCode | ActivityReportType }) {
+export function StatusPill({
+  label,
+  tone,
+  className = "",
+}: {
+  label: string;
+  tone?: AlertLevel | AviationColorCode | ActivityReportType;
+  className?: string;
+}) {
   const style = tone && tone in reportStyles ? reportStyles[tone as ActivityReportType] : alertStyles[(tone as AlertLevel) ?? "UNKNOWN"];
 
   return (
-    <span className={`inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${style}`}>
+    <span className={`inline-flex items-center justify-center rounded-full border px-2.5 py-1 text-xs font-semibold ${style} ${className}`}>
       {label}
     </span>
   );
 }
 
-export function VolcanoStatus({ volcano }: { volcano: Volcano }) {
+export function VolcanoStatus({ volcano, className }: { volcano: Volcano; className?: string }) {
   if (volcano.aviationColorCode !== "UNKNOWN") {
-    return <StatusPill label={`${volcano.alertLevel} / ${volcano.aviationColorCode}`} tone={volcano.aviationColorCode} />;
+    return <StatusPill label={`${volcano.alertLevel} / ${volcano.aviationColorCode}`} tone={volcano.aviationColorCode} className={className} />;
   }
-  if (volcano.latestReportType) return <StatusPill label={volcano.latestReportType} tone={volcano.latestReportType} />;
-  return <StatusPill label="No current alert" tone="UNKNOWN" />;
+  if (volcano.latestReportType) return <StatusPill label={volcano.latestReportType} tone={volcano.latestReportType} className={className} />;
+  return <StatusPill label="No current alert" tone="UNKNOWN" className={className} />;
 }
