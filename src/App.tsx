@@ -198,23 +198,41 @@ function EruptingVolcanoCards({ volcanoes, onSelect }: { volcanoes: Volcano[]; o
                   {group.volcanoes.length} erupting
                 </span>
               </div>
-              <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
-                {group.volcanoes.map((volcano) => (
-                  <button
-                    key={volcano.id}
-                    className="rounded-lg border border-white/10 bg-white/[0.035] p-3 text-left transition hover:border-seismo/60 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-seismo/60"
-                    onClick={() => onSelect(volcano)}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h4 className="text-base font-semibold text-white">{volcano.name}</h4>
-                        <p className="mt-1 text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
-                      </div>
-                      <VolcanoStatus volcano={volcano} />
-                    </div>
-                    <p className="mt-3 text-xs text-slate-500">{volcano.latestReportDate ?? weeklyReportMetadata.reportDate}</p>
-                  </button>
-                ))}
+              <div className="space-y-3">
+                {Array.from(new Set(group.volcanoes.map((volcano) => volcano.country)))
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((country) => {
+                    const countryVolcanoes = group.volcanoes.filter((volcano) => volcano.country === country);
+
+                    return (
+                      <section key={`${group.region}-${country}`} className="rounded-lg border border-white/10 bg-white/[0.025] p-3">
+                        <div className="mb-2 flex items-center justify-between gap-3">
+                          <h4 className="text-sm font-semibold text-slate-200">{country}</h4>
+                          <span className="rounded-full border border-white/10 px-2.5 py-1 text-xs text-slate-400">
+                            {countryVolcanoes.length}
+                          </span>
+                        </div>
+                        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6">
+                          {countryVolcanoes.map((volcano) => (
+                            <button
+                              key={volcano.id}
+                              className="rounded-lg border border-white/10 bg-white/[0.035] p-3 text-left transition hover:border-seismo/60 hover:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-seismo/60"
+                              onClick={() => onSelect(volcano)}
+                            >
+                              <div className="flex items-start justify-between gap-2">
+                                <div>
+                                  <h5 className="text-base font-semibold text-white">{volcano.name}</h5>
+                                  <p className="mt-1 text-xs text-slate-400">{volcano.country} / {volcano.region}</p>
+                                </div>
+                                <VolcanoStatus volcano={volcano} />
+                              </div>
+                              <p className="mt-3 text-xs text-slate-500">{volcano.latestReportDate ?? weeklyReportMetadata.reportDate}</p>
+                            </button>
+                          ))}
+                        </div>
+                      </section>
+                    );
+                  })}
               </div>
             </section>
           );
@@ -332,20 +350,25 @@ export default function App() {
         />
         <DetailPanel volcano={selected} onClose={() => setSelectedId(undefined)} />
 
-        <footer className="pb-8 text-xs leading-6 text-slate-500">
-          <p className="text-sm text-slate-400">
-            Current eruptive activity, unrest, USGS alert overlays, and global Holocene volcano metadata in one operational view.
-          </p>
-          <p className="text-sm text-slate-400">Made by András Tóth and GPT-5.5.</p>
-          <p>
-            Smithsonian weekly snapshot: {weeklyReportMetadata.reportPeriod}. Historical metadata is not a live hazard assessment.
-            Satellite thermal observations, where mentioned, are labeled as observations rather than confirmed eruptions.
-          </p>
-          <p>
-            Source links: <a className="text-seismo hover:text-white" href="https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes/volcanoes" target="_blank" rel="noreferrer">NOAA NCEI</a>,{" "}
-            <a className="text-seismo hover:text-white" href="https://volcano.si.edu/reports_weekly.cfm" target="_blank" rel="noreferrer">Smithsonian/GVP Weekly Report</a>,{" "}
-            <a className="text-seismo hover:text-white" href="https://volcanoes.usgs.gov/vsc/api/" target="_blank" rel="noreferrer">USGS Volcano APIs</a>.
-          </p>
+        <footer className="pb-8">
+          <section className="panel rounded-lg p-5">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-sm text-slate-300">
+                  Current eruptive activity, unrest, USGS alert overlays, and global Holocene volcano metadata in one operational view.
+                </p>
+                <p className="mt-1 text-sm text-slate-400">Made by András Tóth and GPT-5.5.</p>
+              </div>
+              <span className="inline-flex w-fit items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-semibold text-slate-300">
+                {weeklyReportMetadata.reportPeriod}
+              </span>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2 text-sm">
+              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes/volcanoes" target="_blank" rel="noreferrer">NOAA NCEI</a>
+              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://volcano.si.edu/reports_weekly.cfm" target="_blank" rel="noreferrer">Smithsonian/GVP Weekly Report</a>
+              <a className="rounded-md border border-white/10 px-3 py-2 text-seismo transition hover:border-seismo/60 hover:text-white" href="https://volcanoes.usgs.gov/vsc/api/" target="_blank" rel="noreferrer">USGS Volcano APIs</a>
+            </div>
+          </section>
         </footer>
       </div>
     </main>

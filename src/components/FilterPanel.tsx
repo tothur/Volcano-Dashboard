@@ -1,4 +1,4 @@
-import { Search, SlidersHorizontal } from "lucide-react";
+import { Search } from "lucide-react";
 import type { Volcano } from "../types/volcano";
 
 export interface Filters {
@@ -28,11 +28,7 @@ export function FilterPanel({ filters, onFiltersChange, volcanoes }: FilterPanel
 
   return (
     <section className="rounded-lg border border-white/15 bg-basalt-950/75 p-2 shadow-glow backdrop-blur-md">
-      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-[auto_1.35fr_repeat(5,minmax(0,1fr))_auto] xl:items-end">
-        <div className="hidden items-center gap-2 text-sm font-semibold uppercase text-slate-300 xl:flex">
-          <SlidersHorizontal size={16} className="text-seismo" />
-          Filters
-        </div>
+      <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-[1.35fr_repeat(5,minmax(0,1fr))_auto] xl:items-end">
         <label className="md:col-span-2 xl:col-span-1">
           <span className="sr-only">Search by volcano name</span>
           <span className="relative block">

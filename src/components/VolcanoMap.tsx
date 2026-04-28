@@ -1,5 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
+import { SlidersHorizontal, X } from "lucide-react";
 import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from "react-leaflet";
 import { alertLabel } from "../lib/volcanoData";
 import type { Volcano } from "../types/volcano";
@@ -45,6 +46,8 @@ export function VolcanoMap({
   onSelect: (volcano: Volcano) => void;
   controls?: ReactNode;
 }) {
+  const [filtersOpen, setFiltersOpen] = useState(false);
+
   return (
     <section className="panel overflow-hidden rounded-lg">
       <div className="flex flex-col gap-2 border-b border-white/10 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
@@ -61,8 +64,18 @@ export function VolcanoMap({
       </div>
       <div className="relative h-[540px] lg:h-[680px]">
         {controls ? (
-          <div className="pointer-events-none absolute left-3 right-3 top-3 z-[500]">
-            <div className="pointer-events-auto">{controls}</div>
+          <div className="pointer-events-none absolute left-3 top-3 z-[500] max-w-[calc(100%-1.5rem)]">
+            <div className="pointer-events-auto">
+              <button
+                className="inline-flex h-10 items-center gap-2 rounded-md border border-white/15 bg-basalt-950/75 px-3 text-sm font-semibold text-slate-100 shadow-glow backdrop-blur-md transition hover:border-seismo/60"
+                onClick={() => setFiltersOpen((value) => !value)}
+                aria-expanded={filtersOpen}
+              >
+                {filtersOpen ? <X size={16} /> : <SlidersHorizontal size={16} />}
+                Filters
+              </button>
+              {filtersOpen ? <div className="mt-2 w-[min(1120px,calc(100vw-2rem))]">{controls}</div> : null}
+            </div>
           </div>
         ) : null}
         <MapContainer center={[18, 12]} zoom={2} minZoom={2} scrollWheelZoom>
