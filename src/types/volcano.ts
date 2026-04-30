@@ -23,6 +23,7 @@ export interface SourceUrls {
   noaa?: string;
   usgs?: string;
   weeklyReport?: string;
+  dailyReport?: string;
 }
 
 export interface ActivityReport {
@@ -40,7 +41,7 @@ export interface AlertHistoryEntry {
   date: string;
   alertLevel?: AlertLevel;
   aviationColorCode?: AviationColorCode;
-  source: "USGS" | "Smithsonian/GVP" | "Bundled";
+  source: "USGS" | "Smithsonian/GVP" | "Smithsonian/DVAR" | "Bundled";
   summary: string;
   url?: string;
 }

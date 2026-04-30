@@ -8,6 +8,7 @@ Volcano monitoring data is not exposed as one clean global real-time API. This a
 
 - **Bundled global catalog:** `public/data/volcanoes.json` is generated from NOAA NCEI's ArcGIS layer for "Volcano Locations [from Smithsonian]". It includes global volcano name, location, country, elevation, morphology, catalog status, and last-eruption code.
 - **Bundled recent activity snapshot:** `src/data/weeklyReports.ts` contains a curated table snapshot from the Smithsonian/USGS Weekly Volcanic Activity Report for 16 April-22 April 2026.
+- **Optional daily activity overlay:** At runtime the app attempts to fetch Smithsonian/USGS Daily Volcanic Activity Report entries and merge matched volcanoes into the same internal activity model. This is treated as a freshness overlay, not the canonical catalog.
 - **Optional live overlay:** The app attempts to fetch the USGS elevated-volcano endpoint at runtime. If it is blocked by CORS, unavailable, or changed, the app falls back to bundled data.
 
 Historical metadata, confirmed eruptive activity, unrest, aviation color codes, and satellite observations are labeled separately in the UI.
@@ -18,6 +19,7 @@ Historical metadata, confirmed eruptive activity, unrest, aviation color codes, 
 - NOAA ArcGIS hazards layer: https://gis.ngdc.noaa.gov/arcgis/rest/services/web_mercator/hazards/MapServer/7
 - Smithsonian Global Volcanism Program: https://volcano.si.edu/
 - Smithsonian/USGS weekly report: https://volcano.si.edu/reports_weekly.cfm
+- Smithsonian/USGS daily report: https://volcano.si.edu/reports_daily.cfm
 - USGS Volcano Hazards Program API notes: https://volcanoes.usgs.gov/vsc/api/
 - USGS elevated volcanoes endpoint: https://volcanoes.usgs.gov/hans-public/api/volcano/getElevatedVolcanoes
 
@@ -68,7 +70,7 @@ If deploying from GitHub Actions, set the same environment variable in the build
 
 ## Notes and Limitations
 
-- The Smithsonian Excel download is not used as a runtime dependency because automated command-line access can be blocked by Cloudflare.
+- Smithsonian pages can be blocked by Cloudflare or CORS from a static GitHub Pages app. The daily overlay tries the official page first and a read-only CORS proxy second; if both fail, the dashboard keeps the bundled weekly snapshot.
 - The USGS API documentation states these endpoints support USGS applications and should not be assumed to have guaranteed continuing support.
 - The dashboard does not infer hazards from the Holocene catalog. If a volcano has no recent activity or alert record, it is shown as historical metadata only.
 - NASA FIRMS thermal anomaly data is not included by default to avoid presenting satellite heat detections as confirmed eruptions.

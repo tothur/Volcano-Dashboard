@@ -19,6 +19,7 @@ export function DetailPanel({ volcano, onClose }: { volcano?: Volcano; onClose: 
     ["NOAA metadata", volcano.sourceUrls.noaa],
     ["USGS notice", volcano.sourceUrls.usgs],
     ["Weekly report", volcano.sourceUrls.weeklyReport],
+    ["Daily report", volcano.sourceUrls.dailyReport],
   ].filter(([, url]) => Boolean(url));
 
   return (

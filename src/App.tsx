@@ -15,7 +15,9 @@ import { sortVolcanoes, type SortKey, VolcanoTable } from "./components/VolcanoT
 import { VolcanoMap } from "./components/VolcanoMap";
 import { weeklyReportMetadata } from "./data/weeklyReports";
 import {
+  type DailyActivityPayload,
   fetchUsgsElevatedVolcanoes,
+  fetchSmithsonianDailyActivity,
   loadBundledCatalog,
   mergeActivitySources,
   normalizeName,
@@ -102,10 +104,25 @@ function ThemeSelector({
 function EruptionWarningCard({
   erupting,
   metadata,
+  dailyActivity,
+  dailyStatus,
 }: {
   erupting: Volcano[];
   metadata?: VolcanoCatalogMetadata;
+  dailyActivity?: DailyActivityPayload;
+  dailyStatus: "loading" | "available" | "unavailable";
 }) {
+  const freshnessLabel =
+    dailyStatus === "available" && dailyActivity
+      ? `Daily overlay ${dailyActivity.reportDate}`
+      : `Weekly snapshot ${weeklyReportMetadata.reportPeriod}`;
+  const freshnessDetail =
+    dailyStatus === "loading"
+      ? "Checking daily report"
+      : dailyActivity?.bestAvailableDate
+        ? `Best available ${dailyActivity.bestAvailableDate}`
+        : `Catalog refreshed ${metadata ? new Date(metadata.generatedAt).toLocaleDateString() : "loading"}`;
+
   return (
     <section className="panel overflow-hidden rounded-lg border-orange-400/30">
       <div className="flex flex-col gap-4 bg-orange-500/10 p-4 lg:flex-row lg:items-center lg:justify-between">
@@ -122,9 +139,9 @@ function EruptionWarningCard({
           </div>
         </div>
         <span className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-basalt-950/65 px-3 py-1.5 text-xs font-semibold text-slate-200">
-          {weeklyReportMetadata.reportPeriod}
+          {freshnessLabel}
           <span className="h-1 w-1 rounded-full bg-slate-500" />
-          Data refreshed {metadata ? new Date(metadata.generatedAt).toLocaleDateString() : "loading"}
+          {freshnessDetail}
         </span>
       </div>
     </section>
@@ -300,6 +317,8 @@ export default function App() {
   const [isTableCollapsed, setIsTableCollapsed] = useState(true);
   const [catalogError, setCatalogError] = useState<string>();
   const [usgsStatus, setUsgsStatus] = useState<"loading" | "available" | "unavailable">("loading");
+  const [dailyStatus, setDailyStatus] = useState<"loading" | "available" | "unavailable">("loading");
+  const [dailyActivity, setDailyActivity] = useState<DailyActivityPayload>();
   const [themePreference, setThemePreference] = useState<ThemePreference>(getStoredThemePreference);
 
   useEffect(() => {
@@ -312,17 +331,32 @@ export default function App() {
         const base = mergeActivitySources(catalog.volcanoes);
         setVolcanoes(base);
 
-        try {
-          const usgsElevated = await fetchUsgsElevatedVolcanoes(controller.signal);
-          const merged = mergeActivitySources(catalog.volcanoes, usgsElevated);
-          setVolcanoes(merged);
+        const [usgsResult, dailyResult] = await Promise.allSettled([
+          fetchUsgsElevatedVolcanoes(controller.signal),
+          fetchSmithsonianDailyActivity(controller.signal),
+        ]);
+
+        const usgsElevated = usgsResult.status === "fulfilled" ? usgsResult.value : [];
+        const dailyPayload = dailyResult.status === "fulfilled" ? dailyResult.value : undefined;
+
+        if (usgsResult.status === "fulfilled") {
           setUsgsStatus("available");
-        } catch {
+        } else {
           setUsgsStatus("unavailable");
         }
+
+        if (dailyPayload) {
+          setDailyActivity(dailyPayload);
+          setDailyStatus("available");
+        } else {
+          setDailyStatus("unavailable");
+        }
+
+        setVolcanoes(mergeActivitySources(catalog.volcanoes, usgsElevated, dailyPayload?.reports ?? []));
       } catch (error) {
         setCatalogError(error instanceof Error ? error.message : "Unable to load volcano data.");
         setUsgsStatus("unavailable");
+        setDailyStatus("unavailable");
       }
     }
 
@@ -395,7 +429,7 @@ export default function App() {
           </section>
         ) : null}
 
-        <EruptionWarningCard erupting={eruptingVolcanoes} metadata={metadata} />
+        <EruptionWarningCard erupting={eruptingVolcanoes} metadata={metadata} dailyActivity={dailyActivity} dailyStatus={dailyStatus} />
         <EruptingVolcanoCards volcanoes={eruptingVolcanoes} onSelect={(volcano) => setSelectedId(volcano.id)} />
 
         <VolcanoMap
@@ -424,9 +458,11 @@ export default function App() {
             <p className="mt-1 text-sm text-slate-400">Made by András Tóth and GPT-5.5.</p>
             <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-slate-400">
               <span className="font-semibold text-slate-300">{weeklyReportMetadata.reportPeriod}</span>
+              {dailyActivity ? <span className="font-semibold text-slate-300">Daily overlay: {dailyActivity.reportDate}</span> : null}
               <span className="hidden h-1 w-1 rounded-full bg-slate-600 sm:inline-block" />
               <a className="text-seismo hover:text-white" href="https://www.ncei.noaa.gov/products/natural-hazards/tsunamis-earthquakes-volcanoes/volcanoes" target="_blank" rel="noreferrer">NOAA NCEI</a>
               <a className="text-seismo hover:text-white" href="https://volcano.si.edu/reports_weekly.cfm" target="_blank" rel="noreferrer">Smithsonian/GVP</a>
+              <a className="text-seismo hover:text-white" href="https://volcano.si.edu/reports_daily.cfm" target="_blank" rel="noreferrer">Daily report</a>
               <a className="text-seismo hover:text-white" href="https://volcanoes.usgs.gov/vsc/api/" target="_blank" rel="noreferrer">USGS APIs</a>
             </div>
           </div>
