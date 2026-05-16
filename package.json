@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "update:data": "node scripts/update-volcano-data.mjs"
+    "update:data": "node scripts/update-volcano-data.mjs",
+    "update:weekly": "node scripts/update-weekly-reports.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.4",

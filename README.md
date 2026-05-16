@@ -7,7 +7,7 @@ A static-first, single-page volcano monitoring dashboard built with Vite, React,
 Volcano monitoring data is not exposed as one clean global real-time API. This app therefore prioritizes reliability:
 
 - **Bundled global catalog:** `public/data/volcanoes.json` is generated from NOAA NCEI's ArcGIS layer for "Volcano Locations [from Smithsonian]". It includes global volcano name, location, country, elevation, morphology, catalog status, and last-eruption code.
-- **Bundled recent activity snapshot:** `src/data/weeklyReports.ts` contains a curated table snapshot from the Smithsonian/USGS Weekly Volcanic Activity Report for 16 April-22 April 2026.
+- **Bundled recent activity snapshot:** `src/data/weeklyReports.ts` is generated from the latest available Smithsonian/USGS Weekly Volcanic Activity Report RSS feed.
 - **Optional daily activity overlay:** At runtime the app attempts to fetch Smithsonian/USGS Daily Volcanic Activity Report entries and merge matched volcanoes into the same internal activity model. This is treated as a freshness overlay, not the canonical catalog.
 - **Optional live overlay:** The app attempts to fetch the USGS elevated-volcano endpoint at runtime. If it is blocked by CORS, unavailable, or changed, the app falls back to bundled data.
 
@@ -47,7 +47,17 @@ Regenerate `public/data/volcanoes.json` from NOAA:
 npm run update:data
 ```
 
-Review the resulting diff before publishing. The weekly activity snapshot is intentionally curated in `src/data/weeklyReports.ts`; update it manually from the Smithsonian/USGS weekly report so summaries remain clear and source-labeled.
+Regenerate `src/data/weeklyReports.ts` from the Smithsonian weekly RSS feed:
+
+```bash
+npm run update:weekly
+```
+
+Review the resulting diff before publishing. If Smithsonian blocks direct scripted access, download the RSS file separately and run:
+
+```bash
+WEEKLY_RSS_FILE=/path/to/WeeklyVolcanoRSS.xml npm run update:weekly
+```
 
 ## GitHub Pages Deployment
 

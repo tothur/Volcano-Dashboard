@@ -1,4 +1,4 @@
-const CACHE_NAME = "volcano-dashboard-v1";
+const CACHE_NAME = "volcano-dashboard-v2";
 
 function appBasePath() {
   return new URL(self.registration.scope).pathname;
@@ -53,6 +53,21 @@ self.addEventListener("fetch", (event) => {
 
   if (request.mode === "navigate") {
     event.respondWith(fetch(request).catch(() => caches.match(appUrl(""))));
+    return;
+  }
+
+  if (url.pathname.endsWith("/data/volcanoes.json") || url.pathname.endsWith("/site.webmanifest")) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          if (response.ok) {
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request)),
+    );
     return;
   }
 

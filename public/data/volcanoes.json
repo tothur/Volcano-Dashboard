@@ -1,10 +1,10 @@
 {
   "metadata": {
-    "generatedAt": "2026-04-27T20:16:39.281Z",
+    "generatedAt": "2026-05-16T10:35:52.027Z",
     "sourceName": "NOAA NCEI Global Volcano Locations Database, Smithsonian-derived volcano locations",
     "sourceUrl": "https://gis.ngdc.noaa.gov/arcgis/rest/services/web_mercator/hazards/MapServer/7/query?where=1%3D1&outFields=*&returnGeometry=true&f=geojson",
     "sourceNotes": "Downloaded from NOAA's ArcGIS layer for Volcano Locations [from Smithsonian]. The layer contains volcano name, location, elevation, morphology, catalog status, last-eruption code, and country.",
-    "recordCount": 1387
+    "recordCount": 1388
   },
   "volcanoes": [
     {
@@ -679,6 +679,26 @@
       "lastKnownEruption": "Undated or unknown Holocene eruption",
       "status": "holocene",
       "catalogStatus": "Holocene",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "1502824",
+      "name": "Altar",
+      "country": "Ecuador",
+      "region": "Ecuador",
+      "latitude": -1.67,
+      "longitude": -78.42,
+      "elevationMeters": 5321,
+      "volcanoType": "Stratovolcano",
+      "lastKnownEruption": "Unknown",
+      "status": "unknown",
+      "catalogStatus": "Pleistocene",
       "alertLevel": "UNKNOWN",
       "aviationColorCode": "UNKNOWN",
       "sourceUrls": {
@@ -1968,14 +1988,14 @@
       "alertHistory": []
     },
     {
-      "id": "150706",
+      "id": "150306",
       "name": "Azul, Cerro",
-      "country": "Chile",
-      "region": "Chile-C",
-      "latitude": -35.653,
-      "longitude": -70.76100000000001,
-      "elevationMeters": 3788,
-      "volcanoType": "Stratovolcano",
+      "country": "Ecuador",
+      "region": "Galapagos",
+      "latitude": -0.92,
+      "longitude": -91.408,
+      "elevationMeters": 1640,
+      "volcanoType": "Shield volcano",
       "lastKnownEruption": "1964 or later",
       "status": "historical",
       "catalogStatus": "Historical",
@@ -1988,14 +2008,14 @@
       "alertHistory": []
     },
     {
-      "id": "150306",
+      "id": "150706",
       "name": "Azul, Cerro",
-      "country": "Ecuador",
-      "region": "Galapagos",
-      "latitude": -0.92,
-      "longitude": -91.408,
-      "elevationMeters": 1640,
-      "volcanoType": "Shield volcano",
+      "country": "Chile",
+      "region": "Chile-C",
+      "latitude": -35.653,
+      "longitude": -70.76100000000001,
+      "elevationMeters": 3788,
+      "volcanoType": "Stratovolcano",
       "lastKnownEruption": "1964 or later",
       "status": "historical",
       "catalogStatus": "Historical",
@@ -9868,26 +9888,6 @@
       "alertHistory": []
     },
     {
-      "id": "110406",
-      "name": "Imuruk Lake",
-      "country": "United States",
-      "region": "Alaska-W",
-      "latitude": 65.51700000000001,
-      "longitude": -163.45000000000002,
-      "elevationMeters": 610,
-      "volcanoType": "Shield volcano",
-      "lastKnownEruption": "Undated or unknown Holocene eruption",
-      "status": "holocene",
-      "catalogStatus": "Holocene",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
       "id": "110402",
       "name": "Imuruk Lake",
       "country": "United States",
@@ -9899,6 +9899,26 @@
       "lastKnownEruption": "A.D. 1-1499",
       "status": "unknown",
       "catalogStatus": "Radiocarbon",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "110406",
+      "name": "Imuruk Lake",
+      "country": "United States",
+      "region": "Alaska-W",
+      "latitude": 65.51700000000001,
+      "longitude": -163.45000000000002,
+      "elevationMeters": 610,
+      "volcanoType": "Shield volcano",
+      "lastKnownEruption": "Undated or unknown Holocene eruption",
+      "status": "holocene",
+      "catalogStatus": "Holocene",
       "alertLevel": "UNKNOWN",
       "aviationColorCode": "UNKNOWN",
       "sourceUrls": {
@@ -25508,266 +25528,6 @@
       "alertHistory": []
     },
     {
-      "id": "040302",
-      "name": "Unnamed",
-      "country": "Tonga",
-      "region": "Tonga-SW Pacific",
-      "latitude": -21.07,
-      "longitude": -175.33,
-      "elevationMeters": 0,
-      "volcanoType": "Not Volcanic",
-      "lastKnownEruption": "1900-1963",
-      "status": "historical",
-      "catalogStatus": "Historical",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "110117",
-      "name": "Unnamed",
-      "country": "United States",
-      "region": "Aleutian Is",
-      "latitude": 52,
-      "longitude": -173.5,
-      "elevationMeters": 0,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1964 or later",
-      "status": "unknown",
-      "catalogStatus": "Hydrophonic",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "150603",
-      "name": "Unnamed",
-      "country": "Chile",
-      "region": "Chile-Is",
-      "latitude": -33.622,
-      "longitude": -78.78,
-      "elevationMeters": 0,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1800-1899",
-      "status": "historical",
-      "catalogStatus": "Historical",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "180101",
-      "name": "Unnamed",
-      "country": "Atlantic Ocean",
-      "region": "Atlantic-N",
-      "latitude": 66,
-      "longitude": -27.75,
-      "elevationMeters": -108,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1700-1799",
-      "status": "unknown",
-      "catalogStatus": "Uncertain",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "060705",
-      "name": "Unnamed",
-      "country": "Indonesia",
-      "region": "Sangihe Is-Indonesia",
-      "latitude": 3.97,
-      "longitude": 124.17,
-      "elevationMeters": -5000,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "Unknown",
-      "status": "unknown",
-      "catalogStatus": "Uncertain",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "050803",
-      "name": "Unnamed",
-      "country": "Pacific Ocean",
-      "region": "SW Pacific",
-      "latitude": -25.78,
-      "longitude": 168.63,
-      "elevationMeters": -2400,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1964 or later",
-      "status": "unknown",
-      "catalogStatus": "Hydrophonic",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "505061",
-      "name": "Unnamed",
-      "country": "Solomon Is.",
-      "region": "Solomon Is-SW Pacifi",
-      "latitude": -8.92,
-      "longitude": 158.03,
-      "elevationMeters": -240,
-      "volcanoType": "Submarine volcanoes",
-      "lastKnownEruption": "Undated or unknown Holocene eruption",
-      "status": "holocene",
-      "catalogStatus": "Holocene",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "080101",
-      "name": "Unnamed",
-      "country": "Taiwan",
-      "region": "Taiwan-E of",
-      "latitude": 20.93,
-      "longitude": 134.75,
-      "elevationMeters": -6000,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "Unknown",
-      "status": "unknown",
-      "catalogStatus": "Uncertain",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "040303",
-      "name": "Unnamed",
-      "country": "Tonga",
-      "region": "Tonga-SW Pacific",
-      "latitude": -20.852,
-      "longitude": -175.55,
-      "elevationMeters": -296,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1964 or later",
-      "status": "historical",
-      "catalogStatus": "Historical",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "403001",
-      "name": "Unnamed",
-      "country": "Tonga",
-      "region": "Tonga-SW Pacific",
-      "latitude": -24.8,
-      "longitude": -177.02,
-      "elevationMeters": -385,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "Undated or unknown Holocene eruption",
-      "status": "unknown",
-      "catalogStatus": "Fumarolic",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "403011",
-      "name": "Unnamed",
-      "country": "Tonga",
-      "region": "Tonga-SW Pacific",
-      "latitude": -21.150000000000002,
-      "longitude": -175.75,
-      "elevationMeters": -65,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "Undated or unknown Holocene eruption",
-      "status": "holocene",
-      "catalogStatus": "Holocene",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "403091",
-      "name": "Unnamed",
-      "country": "Tonga",
-      "region": "Tonga-SW Pacific",
-      "latitude": -18.325,
-      "longitude": -174.365,
-      "elevationMeters": -40,
-      "volcanoType": "Submarine volcano",
-      "lastKnownEruption": "1964 or later",
-      "status": "historical",
-      "catalogStatus": "Historical",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
-      "id": "1505161",
-      "name": "Unnamed",
-      "country": "Argentina",
-      "region": "Argentina",
-      "latitude": -25.078000000000003,
-      "longitude": -68.266,
-      "elevationMeters": 4652,
-      "volcanoType": "Pyroclastic cone",
-      "lastKnownEruption": "Unknown",
-      "status": "holocene",
-      "catalogStatus": "Holocene?",
-      "alertLevel": "UNKNOWN",
-      "aviationColorCode": "UNKNOWN",
-      "sourceUrls": {
-        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
-        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
-      },
-      "alertHistory": []
-    },
-    {
       "id": "180102",
       "name": "Unnamed",
       "country": "Atlantic Ocean",
@@ -25879,6 +25639,106 @@
       "lastKnownEruption": "Undated or unknown Holocene eruption",
       "status": "holocene",
       "catalogStatus": "Holocene",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "060705",
+      "name": "Unnamed",
+      "country": "Indonesia",
+      "region": "Sangihe Is-Indonesia",
+      "latitude": 3.97,
+      "longitude": 124.17,
+      "elevationMeters": -5000,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "Unknown",
+      "status": "unknown",
+      "catalogStatus": "Uncertain",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "050803",
+      "name": "Unnamed",
+      "country": "Pacific Ocean",
+      "region": "SW Pacific",
+      "latitude": -25.78,
+      "longitude": 168.63,
+      "elevationMeters": -2400,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1964 or later",
+      "status": "unknown",
+      "catalogStatus": "Hydrophonic",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "505061",
+      "name": "Unnamed",
+      "country": "Solomon Is.",
+      "region": "Solomon Is-SW Pacifi",
+      "latitude": -8.92,
+      "longitude": 158.03,
+      "elevationMeters": -240,
+      "volcanoType": "Submarine volcanoes",
+      "lastKnownEruption": "Undated or unknown Holocene eruption",
+      "status": "holocene",
+      "catalogStatus": "Holocene",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "080101",
+      "name": "Unnamed",
+      "country": "Taiwan",
+      "region": "Taiwan-E of",
+      "latitude": 20.93,
+      "longitude": 134.75,
+      "elevationMeters": -6000,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "Unknown",
+      "status": "unknown",
+      "catalogStatus": "Uncertain",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "040303",
+      "name": "Unnamed",
+      "country": "Tonga",
+      "region": "Tonga-SW Pacific",
+      "latitude": -20.852,
+      "longitude": -175.55,
+      "elevationMeters": -296,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1964 or later",
+      "status": "historical",
+      "catalogStatus": "Historical",
       "alertLevel": "UNKNOWN",
       "aviationColorCode": "UNKNOWN",
       "sourceUrls": {
@@ -26119,6 +25979,166 @@
       "lastKnownEruption": "1800-1899",
       "status": "historical",
       "catalogStatus": "Historical",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "040302",
+      "name": "Unnamed",
+      "country": "Tonga",
+      "region": "Tonga-SW Pacific",
+      "latitude": -21.07,
+      "longitude": -175.33,
+      "elevationMeters": 0,
+      "volcanoType": "Not Volcanic",
+      "lastKnownEruption": "1900-1963",
+      "status": "historical",
+      "catalogStatus": "Historical",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "110117",
+      "name": "Unnamed",
+      "country": "United States",
+      "region": "Aleutian Is",
+      "latitude": 52,
+      "longitude": -173.5,
+      "elevationMeters": 0,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1964 or later",
+      "status": "unknown",
+      "catalogStatus": "Hydrophonic",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "150603",
+      "name": "Unnamed",
+      "country": "Chile",
+      "region": "Chile-Is",
+      "latitude": -33.622,
+      "longitude": -78.78,
+      "elevationMeters": 0,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1800-1899",
+      "status": "historical",
+      "catalogStatus": "Historical",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "180101",
+      "name": "Unnamed",
+      "country": "Atlantic Ocean",
+      "region": "Atlantic-N",
+      "latitude": 66,
+      "longitude": -27.75,
+      "elevationMeters": -108,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1700-1799",
+      "status": "unknown",
+      "catalogStatus": "Uncertain",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "403001",
+      "name": "Unnamed",
+      "country": "Tonga",
+      "region": "Tonga-SW Pacific",
+      "latitude": -24.8,
+      "longitude": -177.02,
+      "elevationMeters": -385,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "Undated or unknown Holocene eruption",
+      "status": "unknown",
+      "catalogStatus": "Fumarolic",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "403011",
+      "name": "Unnamed",
+      "country": "Tonga",
+      "region": "Tonga-SW Pacific",
+      "latitude": -21.150000000000002,
+      "longitude": -175.75,
+      "elevationMeters": -65,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "Undated or unknown Holocene eruption",
+      "status": "holocene",
+      "catalogStatus": "Holocene",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "403091",
+      "name": "Unnamed",
+      "country": "Tonga",
+      "region": "Tonga-SW Pacific",
+      "latitude": -18.325,
+      "longitude": -174.365,
+      "elevationMeters": -40,
+      "volcanoType": "Submarine volcano",
+      "lastKnownEruption": "1964 or later",
+      "status": "historical",
+      "catalogStatus": "Historical",
+      "alertLevel": "UNKNOWN",
+      "aviationColorCode": "UNKNOWN",
+      "sourceUrls": {
+        "smithsonian": "https://volcano.si.edu/volcanolist_holocene.cfm",
+        "noaa": "https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.ngdc.mgg.hazards%3AG02135"
+      },
+      "alertHistory": []
+    },
+    {
+      "id": "1505161",
+      "name": "Unnamed",
+      "country": "Argentina",
+      "region": "Argentina",
+      "latitude": -25.078000000000003,
+      "longitude": -68.266,
+      "elevationMeters": 4652,
+      "volcanoType": "Pyroclastic cone",
+      "lastKnownEruption": "Unknown",
+      "status": "holocene",
+      "catalogStatus": "Holocene?",
       "alertLevel": "UNKNOWN",
       "aviationColorCode": "UNKNOWN",
       "sourceUrls": {

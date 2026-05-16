@@ -115,7 +115,7 @@ function EruptionWarningCard({
   const freshnessLabel =
     dailyStatus === "available" && dailyActivity
       ? `Daily overlay ${dailyActivity.reportDate}`
-      : `Weekly snapshot ${weeklyReportMetadata.reportPeriod}`;
+      : `Latest official weekly snapshot ${weeklyReportMetadata.reportPeriod}`;
   const freshnessDetail =
     dailyStatus === "loading"
       ? "Checking daily report"
